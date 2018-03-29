@@ -42,13 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\IMutatable.cs" />
+    <Compile Include="Accuracy\MutationProbabilityFinder.cs" />
+    <Compile Include="Core\FamilialUnit.cs" />
+    <Compile Include="Core\Globals.cs" />
+    <Compile Include="Core\Interface\IMutatable.cs" />
+    <Compile Include="Core\Interface\IPopulationManager.cs" />
+    <Compile Include="Core\Interface\IPopulationUnit.cs" />
+    <Compile Include="Core\PopulationManager.cs" />
+    <Compile Include="Core\PopulationUnit.cs" />
+    <Compile Include="Core\ThreadRandom.cs" />
+    <Compile Include="Managers\StringUnitPopulationManager.cs" />
+    <Compile Include="Units\StringFamilialUnit.cs" />
+    <Compile Include="Units\StringUnit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Statistics\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

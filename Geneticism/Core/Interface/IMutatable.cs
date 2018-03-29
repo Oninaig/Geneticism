@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geneticism.Core
+namespace Geneticism.Core.Interface
 {
     public interface IMutatable<T>
     {
         T Genome { get; set; }
-        void Mutate();
+        bool Mutate();
+        Random rand { get; }
     }
 }
