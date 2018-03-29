@@ -7,7 +7,7 @@ using Geneticism.Accuracy;
 using Geneticism.Core.Interface;
 using Geneticism.Managers;
 using Geneticism.Units;
-
+using Console = Colorful.Console;
 namespace Geneticism
 {
     class Program

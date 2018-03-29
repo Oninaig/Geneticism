@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Geneticism.Core;
 using Geneticism.Core.Interface;
 using Geneticism.Units;
+using Console = Colorful.Console;
+using StringUnit = Geneticism.Units.StringUnit;
 
 namespace Geneticism.Managers
 {
@@ -126,7 +129,7 @@ namespace Geneticism.Managers
                 if (this.CurrentPopulation.Any(x =>
                     ((StringUnit)x).Genome.Equals(TargetString, StringComparison.CurrentCultureIgnoreCase)))
                 {
-                    Console.WriteLine($"Target string reached in generation {i}.");
+                    //Console.WriteLine($"Target string reached in generation {i}.");
                     var winningChild = this.CurrentPopulation.First(x =>
                         ((StringUnit)x).Genome.Equals(TargetString, StringComparison.InvariantCultureIgnoreCase));
 
@@ -139,7 +142,7 @@ namespace Geneticism.Managers
                 ReplacePopulation(bestChildren);
                 //Console.WriteLine(new string('\n', 3));
             }
-            Console.WriteLine("No winning child found after max generations :(");
+            Console.WriteLine("No winning child found after max generations :(", Color.Red);
             return Generations;
         }
 

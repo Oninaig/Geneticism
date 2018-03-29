@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Geneticism.Core;
 using Geneticism.Core.Interface;
-
+using Console = Colorful.Console;
 namespace Geneticism.Units
 {
     class StringFamilialUnit : FamilialUnit<string>

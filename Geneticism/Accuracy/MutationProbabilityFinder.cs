@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Geneticism.Core;
 using Geneticism.Managers;
-
+using Console = Colorful.Console;
 namespace Geneticism.Accuracy
 {
     public static class MutationProbabilityFinder
@@ -25,7 +25,6 @@ namespace Geneticism.Accuracy
                 Parallel.For(0, 100, options, k =>
                 {
                     Globals.BaseMutationChance = i;
-
                     var seedParams = new Dictionary<string, object>();
                     seedParams.Add("populationSize", 100);
                     seedParams.Add("generations", 500);
@@ -44,6 +43,8 @@ namespace Geneticism.Accuracy
                     }
                 });
             }
+
+            Console.WriteLine($"Gen0 - {GC.CollectionCount(0)} | Gen1 - {GC.CollectionCount(1)} | Gen2- {GC.CollectionCount(2)}");
             return bestProbability;
         }
     }

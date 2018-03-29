@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Geneticism.Core;
 using Geneticism.Core.Interface;
-
+using Console = Colorful.Console;
 namespace Geneticism.Units
 {
     public class StringUnit : PopulationUnit<string>, IMutatable<string>
@@ -14,7 +14,7 @@ namespace Geneticism.Units
         public StringUnit ParentA { get; set; }
         public StringUnit ParentB { get; set; }
 
-        private readonly bool _isRoot;
+        private bool _isRoot;
 
 
         //todo: make these part of the interface
@@ -26,6 +26,7 @@ namespace Geneticism.Units
         public bool IsRoot
         {
             get { return _isRoot; }
+            set { this._isRoot = value; }
         }
 
         public StringUnit(string genome, StringUnit parentA, StringUnit parentB)
@@ -74,6 +75,15 @@ namespace Geneticism.Units
                 if (Genome[i] == target[i])
                     this.IncreaseFitness();
             }
+        }
+
+        public void ReplaceProperties(string genome, StringUnit parentA, StringUnit parentB, bool isRoot)
+        {
+            this.Genome = genome;
+            this.ParentA = parentA;
+            this.ParentB = parentB;
+            this._isRoot = isRoot;
+            ResetFitness();
         }
 
         public override bool Mutate()
