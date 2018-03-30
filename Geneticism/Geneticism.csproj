@@ -53,9 +53,12 @@
     <Compile Include="Core\Interface\IPopulationManager.cs" />
     <Compile Include="Core\Interface\IPopulationUnit.cs" />
     <Compile Include="Core\PopulationManager.cs" />
+    <Compile Include="Core\PopulationStruct.cs" />
     <Compile Include="Core\PopulationUnit.cs" />
+    <Compile Include="Core\Tools\StructTools.cs" />
     <Compile Include="Core\ThreadRandom.cs" />
     <Compile Include="Managers\StringUnitPopulationManager.cs" />
+    <Compile Include="Units\StringStructFamilialUnit.cs" />
     <Compile Include="Units\StringFamilialUnit.cs" />
     <Compile Include="Units\StringUnit.cs" />
     <Compile Include="Program.cs" />

@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Geneticism.Core;
 using Geneticism.Managers;
 using Console = Colorful.Console;
+
 namespace Geneticism.Accuracy
 {
     public static class MutationProbabilityFinder
     {
-
         public static double FindBestMutationProbability()
         {
-            int bestGeneration = 500;
-            double bestProbability = 0.0;
-            object _locker = new object();
+            var bestGeneration = 500;
+            var bestProbability = 0.0;
+            var _locker = new object();
 
-            for (double i = 0.0; i < 0.02; i += 0.001)
+            for (var i = 0.0; i < 0.02; i += 0.001)
             {
                 var options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = 6;
@@ -44,7 +42,8 @@ namespace Geneticism.Accuracy
                 });
             }
 
-            Console.WriteLine($"Gen0 - {GC.CollectionCount(0)} | Gen1 - {GC.CollectionCount(1)} | Gen2- {GC.CollectionCount(2)}");
+            Console.WriteLine(
+                $"Gen0 - {GC.CollectionCount(0)} | Gen1 - {GC.CollectionCount(1)} | Gen2- {GC.CollectionCount(2)}");
             return bestProbability;
         }
     }

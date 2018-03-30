@@ -8,9 +8,10 @@ namespace Geneticism.Core.Interface
 {
     public interface IPopulationManager<T>
     {
-        
+
         //IEnumerable<PopulationUnit<T>> Breed(IPopulationUnit<T> parentA, IPopulationUnit<T> parentB);
-        IEnumerable<PopulationUnit<T>> CurrentPopulation { get; }
+        //IEnumerable<PopulationUnit<T>> CurrentPopulation { get; }
+        IList<StringPopulationStruct> CurrentPopulation { get; }
         void SeedPopulation();
         void EvaluateSeedParameters(IDictionary<string, object> seedParams);
     }

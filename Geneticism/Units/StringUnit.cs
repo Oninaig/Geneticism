@@ -77,15 +77,6 @@ namespace Geneticism.Units
             }
         }
 
-        public void ReplaceProperties(string genome, StringUnit parentA, StringUnit parentB, bool isRoot)
-        {
-            this.Genome = genome;
-            this.ParentA = parentA;
-            this.ParentB = parentB;
-            this._isRoot = isRoot;
-            ResetFitness();
-        }
-
         public override bool Mutate()
         {
             //Slow mutations over time
