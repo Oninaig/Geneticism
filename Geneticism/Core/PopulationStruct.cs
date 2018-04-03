@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace Geneticism.Core
         public string ParentAID;
         public string ParentBID;
         public bool IsRoot;
+        public bool MarkedForPreservation;
         public int Fitness;
         public int DefaultFitness;
 
@@ -23,6 +25,7 @@ namespace Geneticism.Core
             Genome = genome;
             IsRoot = isRoot;
             this.ID = Guid.NewGuid().ToString();
+            DefaultFitness = Globals.DefaultFitness;
         }
 
         public StringPopulationStruct(string genome, bool isRoot, int defaultFitness) : this(genome, isRoot)
@@ -42,29 +45,31 @@ namespace Geneticism.Core
             this.ParentBID = parentBId;
         }
 
-        public void SetFitness(int fitness, bool isDefault = false)
+        public int SetFitness(int fitness, bool isDefault = false)
         {
             this.Fitness = fitness;
             if (isDefault)
                 this.DefaultFitness = fitness;
+            return this.Fitness;
         }
 
-        public void ResetFitness()
+        public int  ResetFitness()
         {
             this.Fitness = this.DefaultFitness;
+            return this.Fitness;
         }
 
-        public void IncreaseFitness()
+        public int IncreaseFitness()
         {
-            this.Fitness--;
+            return --this.Fitness;
         }
 
-        public void DecreaseFitness()
+        public int DecreaseFitness()
         {
-            this.Fitness++;
+            return this.Fitness++;
         }
 
-        public void CalculateFitness(string target)
+        public int CalculateFitness(string target)
         {
             ResetFitness();
             for (int i = 0; i < Genome.Length; i++)
@@ -72,9 +77,10 @@ namespace Geneticism.Core
                 if (Genome[i] == target[i])
                     this.IncreaseFitness();
             }
+            return this.Fitness;
         }
 
-        public bool Mutate()
+        public string Mutate()
         {
             //Slow mutations over time
             var probability = (double)Globals.BaseMutationChance * (double)1001;
@@ -86,9 +92,9 @@ namespace Geneticism.Core
                 b[ThreadRandom.Next(b.Length)] = Globals.RandomChar();
                 Genome = b.ToString();
 
-                return true;
+                return Genome;
             }
-            return false;
+            return Genome;
         }
     }
 }

@@ -38,17 +38,25 @@ namespace Geneticism.Units
             var parentBSecond = ParentB.Genome.Substring(splitIndex);
 
             //AF -> BS and BF -> AS
-            var firstChild = new StringPopulationStruct(string.Concat(parentAFirst, parentBSecond), ParentA.ID, ParentB.ParentBID);
+            var firstChild = new StringPopulationStruct(string.Concat(parentAFirst, parentBSecond), ParentA.ID, ParentB.ID);
             var secondChild = new StringPopulationStruct(string.Concat(parentBFirst, parentASecond), ParentA.ID, ParentB.ID);
             var children = new List<StringPopulationStruct>() { firstChild, secondChild };
 
             //Attempt mutation
             //todo: make Mutate method part of IPopulationUnit to avoid type casting here?
-            foreach (StringPopulationStruct child in children)
+            for (int i = 0; i < children.Count; i++)
             {
-                child.Mutate();
-                child.CalculateFitness(TargetString);
+                var child = children[i];
+
+                child.Genome = child.Mutate();
+                child.Fitness = child.CalculateFitness(TargetString);
+                children[i] = child;
             }
+            //foreach (StringPopulationStruct child in children)
+            //{
+            //    child.Mutate();
+            //    child.CalculateFitness(TargetString);
+            //}
 
             return children;
         }

@@ -10,7 +10,7 @@ namespace Geneticism.Core
     {
         public const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?!@#$%^&*()-=_+;'[]<>:";
         public static Random Rand = new Random();
-        public static double BaseMutationChance = .02;
+        public static double BaseMutationChance = .01;
         public static int DefaultFitness = 0;
         public static char RandomChar()
         {

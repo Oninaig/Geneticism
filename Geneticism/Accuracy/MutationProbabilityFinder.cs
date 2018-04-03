@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using Geneticism.Core;
 using Geneticism.Managers;
@@ -19,7 +20,7 @@ namespace Geneticism.Accuracy
             {
                 var options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = 6;
-                Console.WriteLine($"Testing probability {i}");
+                Console.WriteLine($"Testing probability {i}", Color.White);
                 Parallel.For(0, 100, options, k =>
                 {
                     Globals.BaseMutationChance = i;
