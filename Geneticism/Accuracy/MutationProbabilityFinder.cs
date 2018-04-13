@@ -16,7 +16,7 @@ namespace Geneticism.Accuracy
             var bestProbability = 0.0;
             var _locker = new object();
 
-            for (var i = 0.0; i < 0.02; i += 0.001)
+            for (var i = 0.0; i < 0.005; i += 0.001)
             {
                 var options = new ParallelOptions();
                 options.MaxDegreeOfParallelism = 6;

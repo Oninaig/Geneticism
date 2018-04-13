@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Geneticism.Core;
-using Geneticism.Core.Interface;
 using Console = Colorful.Console;
 namespace Geneticism.Units
 {
-    class StringFamilialUnit : FamilialUnit<string>
+    class StringFamilialUnit
     {
-        public new StringUnit ParentA
-        {
-            get { return (StringUnit) base.ParentA; }
-            set { base.ParentA = value; }
-        }
+        public StringUnit ParentA { get; set; }
 
-        public new StringUnit ParentB
-        {
-            get { return (StringUnit) base.ParentB; }
-            set { base.ParentB = value; }
-        }
+        public StringUnit ParentB { get; set; }
 
         public string TargetString { get; set; }
 
-        public StringFamilialUnit(IEnumerable<IPopulationUnit<string>> parents, string targetString)
+        public StringFamilialUnit(IEnumerable<StringUnit> parents, string targetString)
         {
-            this.ParentA = parents.ElementAt(0) as StringUnit;
-            this.ParentB = parents.ElementAt(1) as StringUnit;
+            this.ParentA = parents.ElementAt(0);
+            this.ParentB = parents.ElementAt(1);
             this.TargetString = targetString;
         }
 
@@ -37,18 +29,20 @@ namespace Geneticism.Units
         }
 
 
-        public override  IEnumerable<IPopulationUnit<string>> Breed()
+        public IList<StringUnit> Breed()
         {
             //Get random index and split there.
-            var splitIndex = ThreadRandom.Next(((StringUnit) ParentA).Genome.Length);
-            var parentAFirst = ParentA.Genome.Substring(0, splitIndex);
-            var parentASecond = ParentA.Genome.Substring(splitIndex);
-            var parentBFirst = ParentB.Genome.Substring(0, splitIndex);
-            var parentBSecond = ParentB.Genome.Substring(splitIndex);
+            var len = ParentA.Genome.Length;
+            var splitIndex = ThreadRandom.Next(len);
+            
+            var parentAFirst = ParentA.Genome.ToString(0, splitIndex);
+            var parentASecond = ParentA.Genome.ToString(splitIndex, len - (splitIndex));
+            var parentBFirst = ParentB.Genome.ToString(0, splitIndex);
+            var parentBSecond = ParentB.Genome.ToString(splitIndex, len - (splitIndex));
 
             //AF -> BS and BF -> AS
-            var firstChild = new StringUnit(string.Concat(parentAFirst, parentBSecond), ParentA, ParentB );
-            var secondChild = new StringUnit(string.Concat(parentBFirst, parentASecond), ParentA, ParentB);
+            var firstChild = new StringUnit(new StringBuilder(string.Concat(parentAFirst, parentBSecond)), ParentA, ParentB );
+            var secondChild = new StringUnit(new StringBuilder(string.Concat(parentBFirst, parentASecond)), ParentA, ParentB);
             var children = new List<StringUnit>() { firstChild, secondChild };
 
             //Attempt mutation
